@@ -13,10 +13,10 @@ var (
  )
 
  var (
-   client = flag.Int("Clients",1,"Please input client quantity(default: 1 client)")
-   times = flag.Int("Count",1,"Please input times of one client quantity(default: 1 times)")
+   client = flag.Int("clients",1,"Please input client quantity(default: 1 client)")
+   times = flag.Int("count",1,"Please input times of one client quantity(default: 1 times)")
    url = flag.String("urlPath","https://www.baidu.com","Please input urlpath you want to test(default:baidu)")
-   sleep = flag.Int("Sleep",0,"Please input sleep time if you want to sleep duing test(default: close)")
+   sleep = flag.Int("sleep",0,"Please input sleep time if you want to sleep duing test(default: close)")
    sleep_count = flag.Int("sleep-count",0,"Please input sleep count(default:0)")
  )
 
