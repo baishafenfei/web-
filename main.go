@@ -16,6 +16,8 @@ var (
    client = flag.Int("Clients",1,"Please input client quantity(default: 1 client)")
    times = flag.Int("Count",1,"Please input times of one client quantity(default: 1 times)")
    url = flag.String("urlPath","https://www.baidu.com","Please input urlpath you want to test(default:baidu)")
+   sleep = flag.Int("Sleep",0,"Please input sleep time if you want to sleep duing test(default: close)")
+   sleep_count = flag.Int("sleep-count",0,"Please input sleep count(default:0)")
  )
 
  
@@ -26,6 +28,7 @@ func run(num int) {
   
   no := 0.0
   ok := 0.0
+  count := 0
   
   for i := 0 ; i< num ; i++ {
     //set url here
@@ -42,6 +45,14 @@ func run(num int) {
       break
     }
     ok += 1
+    count += 1
+    //如果是刷访问量，这里会sleep
+    if *sleep != 0 && *sleep_count != 0 && count == *sleep_count {
+      fmt.Println("Need sleep now ",count)
+        time.Sleep(time.Duration(*sleep)*time.Millisecond )
+        count = 0
+    }
+
   }
   success += ok
   faile += no
