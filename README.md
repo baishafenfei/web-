@@ -5,8 +5,8 @@
 https://blog.csdn.net/oLeiShen/article/details/84106157
 
 使用方法：
-测试方法，-client是并发请求协程数量，-times是每个协程请求次数，-url是测试的地址，测试结果如下：
-go build main.go
+测试方法，-client是并发请求协程数量，-times是每个协程请求次数，-url是测试的地址，测试结果如下：  
+go build main.go  
  
 main.exe -client=20 -times=3 -url=https://baidu.com  
  
