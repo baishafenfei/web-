@@ -8,7 +8,7 @@ https://blog.csdn.net/oLeiShen/article/details/84106157
 测试方法，-client是并发请求协程数量，-times是每个协程请求次数，-url是测试的地址，测试结果如下：
 go build main.go
  
-main.exe -client=20 -times=3 -u=https://baidu.com
+main.exe -client=20 -times=3 -url=https://baidu.com
  
 Start web Test clients:20 times:3
 Waiting web test end...
