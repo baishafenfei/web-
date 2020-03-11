@@ -63,7 +63,7 @@ func main () {
     go run(*times)
   }
   
-  fmt.Println("Wait web test end")
+  fmt.Println("Wait web test end...")
   wg.Wait()
   end_time := time.Now().UnixNano()
   
