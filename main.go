@@ -10,8 +10,14 @@ var (
   total = 0.0
   success = 0.0
   faile = 0.0
-  count = 5 
  )
+
+ var (
+   client = flag.Int("Clients",1,"Please input client quantity(default: 1 client)")
+   times = flag.Int("Count",1,"Please input times of one client quantity(default: 1 times)")
+   url = flag.String("urlPath","http://www.baidu.com","Please input urlpath you want to test(default:baidu)")
+ )
+
  
  var wg sync.WaitGroup
  
@@ -23,7 +29,7 @@ func run(num int) {
   
   for i := 0 ; i< num ; i++ {
     //set url here
-    resp , err := http.Get("http://www.baidu.com")
+    resp , err := http.Get(*url)
     if err := nil {
       fmt.Println("err:",err)
       no += 1
@@ -43,20 +49,31 @@ func run(num int) {
 }
 func main () {
   start_time := time.Now().UnixNano()
-  fmt.Println("Start web Test")
-  for i := 0 ; i < count;i++ {
+  
+  flag.Parse()
+  if *client == 0 || *times == 0 || *url == "" {
+    flag.PrintDefault()
+    return
+  }
+  
+  fmt.Println("Start web Test clients:",*client,"times:",*times)
+  
+  for i := 0 ; i < *client;i++ {
     wg.Add(1)
-    go run(10)
+    go run(*times)
   }
   
   fmt.Println("Wait web test end")
   wg.Wait()
   end_time := time.Now().UnixNano()
+  
   fmt.Println("End web Test")
+  fmt.Println("PreTotal:",(*client)*(*times))
   fmt.Println("Total:",total)
   fmt.Println("Success:",success)
   fmt.Println("Faile:",faile)
-  fmt.Println("UseTime:,fmt.Sprint("%.4f",float64(end_time-start_time)))
+  fmt.Println("SuccessRate:", fmt.Sprintf("%.2f", ((success/total)*100.0)), "%")  
+  fmt.Println("UseTime:", fmt.Sprintf("%.4f", float64(end_time-start_time)/1e9), "s")
 }            
   
   
